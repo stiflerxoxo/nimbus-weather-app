@@ -1,0 +1,62 @@
+:root {
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --text-primary: #fdfdfb;
+  --text-secondary: rgba(253, 253, 251, 0.74);
+  --text-faint: rgba(253, 253, 251, 0.5);
+
+  --panel-bg: rgba(10, 18, 28, 0.34);
+  --panel-bg-strong: rgba(10, 18, 28, 0.46);
+  --panel-border: rgba(255, 255, 255, 0.16);
+  --panel-blur: 20px;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+input {
+  font-family: var(--font-body);
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

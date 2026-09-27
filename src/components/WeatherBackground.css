@@ -1,0 +1,315 @@
+.weather-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  transition: background 1.2s ease;
+}
+
+/* ---------- Sky gradients per condition ---------- */
+
+.weather-bg--clear-day {
+  background: linear-gradient(180deg, #4a90c4 0%, #7ec8e3 45%, #ffd8a8 100%);
+}
+
+.weather-bg--clear-night {
+  background: linear-gradient(180deg, #050912 0%, #0e1a30 55%, #1c2b45 100%);
+}
+
+.weather-bg--cloudy-day {
+  background: linear-gradient(180deg, #6c8ea8 0%, #9fb3c0 55%, #c7d0d3 100%);
+}
+
+.weather-bg--cloudy-night {
+  background: linear-gradient(180deg, #0a0f1a 0%, #1a2433 55%, #2b3648 100%);
+}
+
+.weather-bg--fog-day,
+.weather-bg--fog-night {
+  background: linear-gradient(180deg, #8b939a 0%, #aab1b6 60%, #c7cbcd 100%);
+}
+
+.weather-bg--rain-day {
+  background: linear-gradient(180deg, #384c5c 0%, #55697a 55%, #74838f 100%);
+}
+
+.weather-bg--rain-night {
+  background: linear-gradient(180deg, #0a1018 0%, #131c26 55%, #1e2a35 100%);
+}
+
+.weather-bg--snow-day {
+  background: linear-gradient(180deg, #7c8a9a 0%, #a9b6c1 55%, #dbe3e8 100%);
+}
+
+.weather-bg--snow-night {
+  background: linear-gradient(180deg, #0d1420 0%, #202c3c 55%, #34435570 100%);
+}
+
+.weather-bg--thunderstorm-day,
+.weather-bg--thunderstorm-night {
+  background: linear-gradient(180deg, #10141c 0%, #1e2530 55%, #2c3540 100%);
+}
+
+.weather-layer {
+  position: absolute;
+  inset: 0;
+}
+
+/* ---------- Sun ---------- */
+
+.sun-layer {
+  overflow: hidden;
+}
+
+.sun-glow {
+  position: absolute;
+  top: 8%;
+  right: 12%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 230, 170, 0.55) 0%, rgba(255, 230, 170, 0) 70%);
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+.sun-core {
+  position: absolute;
+  top: 12%;
+  right: 16%;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff6df, #ffd97a 70%);
+  box-shadow: 0 0 60px rgba(255, 217, 122, 0.6);
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+
+/* ---------- Moon + stars ---------- */
+
+.moon-shape {
+  position: absolute;
+  top: 10%;
+  right: 14%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #f4f1e6;
+  box-shadow: -16px 4px 0 2px #0e1a30, 0 0 40px rgba(244, 241, 230, 0.35);
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #fff;
+  animation-name: twinkle;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Clouds ---------- */
+
+.cloud-shape {
+  position: absolute;
+  left: -30%;
+  width: 260px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 100px;
+  filter: blur(6px);
+  animation-name: drift-cloud;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.cloud-shape::before,
+.cloud-shape::after {
+  content: '';
+  position: absolute;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cloud-shape::before {
+  width: 90px;
+  height: 90px;
+  top: -40px;
+  left: 30px;
+}
+
+.cloud-shape::after {
+  width: 110px;
+  height: 110px;
+  top: -50px;
+  left: 130px;
+}
+
+@keyframes drift-cloud {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(160vw);
+  }
+}
+
+/* ---------- Rain ---------- */
+
+.raindrop {
+  position: absolute;
+  top: -10%;
+  width: 1.5px;
+  height: 60px;
+  background: linear-gradient(180deg, rgba(210, 227, 240, 0), rgba(210, 227, 240, 0.7));
+  animation-name: fall-rain;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall-rain {
+  from {
+    transform: translateY(-10vh);
+  }
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+/* ---------- Snow ---------- */
+
+.snowflake {
+  position: absolute;
+  top: -5%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  animation-name: fall-snow;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fall-snow {
+  0% {
+    transform: translate(0, -5vh);
+  }
+  25% {
+    transform: translate(20px, 27vh);
+  }
+  50% {
+    transform: translate(-15px, 55vh);
+  }
+  75% {
+    transform: translate(15px, 80vh);
+  }
+  100% {
+    transform: translate(0, 110vh);
+  }
+}
+
+/* ---------- Fog ---------- */
+
+.fog-band {
+  position: absolute;
+  left: -20%;
+  width: 140%;
+  height: 140px;
+  background: rgba(255, 255, 255, 0.35);
+  filter: blur(18px);
+  border-radius: 50%;
+  animation-name: drift-fog;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.fog-band--1 {
+  top: 20%;
+  animation-duration: 26s;
+}
+
+.fog-band--2 {
+  top: 45%;
+  animation-duration: 34s;
+  animation-delay: -8s;
+  opacity: 0.7;
+}
+
+.fog-band--3 {
+  top: 68%;
+  animation-duration: 20s;
+  animation-delay: -4s;
+  opacity: 0.5;
+}
+
+@keyframes drift-fog {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(6%);
+  }
+}
+
+/* ---------- Lightning ---------- */
+
+.lightning-flash {
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  opacity: 0;
+  animation: lightning-strike 7s infinite;
+}
+
+@keyframes lightning-strike {
+  0%,
+  92%,
+  100% {
+    opacity: 0;
+  }
+  93% {
+    opacity: 0.55;
+  }
+  94% {
+    opacity: 0.05;
+  }
+  95% {
+    opacity: 0.4;
+  }
+  96%,
+  99% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cloud-shape,
+  .raindrop,
+  .snowflake,
+  .fog-band,
+  .star,
+  .sun-glow,
+  .lightning-flash {
+    animation: none !important;
+  }
+}
